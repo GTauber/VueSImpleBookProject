@@ -24,7 +24,7 @@
         <div class="row">
           <div class="col">
             <div class="row row-cols-3">
-              <div @click="open($event)" v-for="(book) in books" :key="book.id">
+              <div v-for="(book) in books" :key="book.id">
                 <gt-book-card type="button" :book="book" ></gt-book-card>
               </div>
             </div>
@@ -61,27 +61,14 @@ export default {
         author: this.author,
         desc: this.desc,
       };
-      this.books.push(book);
+      this.$store.commit("addBook", book);
     },
 
-    // addChild(e) {
-    //   let push = true;
-    //   if (this.clicked.length > 0) {
-    //     this.clicked.forEach((el) => {
-    //       if(el === e.currentTarget) {
-    //         e.currentTarget.style.zIndex = 0;
-    //         this.clicked.splice(this.clicked.indexOf(el), 1);
-    //         push = false;
-    //       }
-    //     });
-    //   }
-    //   if (push) {
-    //     this.clicked.push(e);
-    //   }
-    //   e.currentTarget.style.zIndex = this.clicked.length + 1;
-    // },
-  },
 
+  },
+  created() {
+    this.books = this.$store.state.books;
+  },
 }
 </script>
 
